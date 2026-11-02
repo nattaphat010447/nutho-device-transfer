@@ -1,0 +1,12 @@
+{
+  "display_name": "Nutho Device Transfer",
+  "loading_order": 10,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "nutho",
+  "version": "1.0.0",
+  "homePage": "",
+  "auto_update": true
+}
