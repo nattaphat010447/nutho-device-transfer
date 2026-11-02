@@ -82,12 +82,16 @@ function buildPanel() {
         return;
       }
       for (const [key, hash] of Object.entries(pending.hashes)) remember(state.synced, key, hash);
-      state.lastConfirmedAt = pending.at;
+      // A package with a failed category must not move the "sent up to here" mark, or the
+      // missing part would never be sent again.
+      if (!pending.partial) state.lastConfirmedAt = pending.at;
       state.pending = null;
       saveState();
       renderPending();
       renderInfo();
-      toastr.success('บันทึกแล้ว ครั้งถัดไปจะส่งเฉพาะที่เปลี่ยนต่อจากนี้');
+      toastr.success(pending.partial
+        ? 'บันทึกแล้ว แต่ไฟล์นี้ขาดบางหมวด ครั้งหน้าจะส่งส่วนที่ขาดซ้ำ'
+        : 'บันทึกแล้ว ครั้งถัดไปจะส่งเฉพาะที่เปลี่ยนต่อจากนี้');
     });
     const discardButton = h('div', { class: 'menu_button menu_button_icon' },
       h('i', { class: 'fa-solid fa-xmark' }), h('span', { text: 'ยกเลิก' }));
@@ -100,6 +104,7 @@ function buildPanel() {
       h('div', { class: 'ndt-pending-title', text: `ไฟล์ล่าสุดที่ส่งออก: ${pending.filename}` }),
       h('div', { class: 'ndt-muted', text: `${pending.summary} · รหัสยืนยัน ${pending.code} (แสดงบนเครื่องปลายทางหลังนำเข้าเสร็จ)` }),
       h('div', { class: 'ndt-muted', text: 'ยังไม่ได้ยืนยัน: ถ้า Export อีกรอบ จะส่งช่วงเดิมซ้ำ ไม่มีข้อมูลหาย' }),
+      pending.partial ? h('div', { class: 'ndt-warn', text: '⚠ ไฟล์นี้ขาดบางหมวด (เซิร์ฟเวอร์ตอบ error) ลอง Export ใหม่เพื่อให้ครบ' }) : null,
       h('div', { class: 'ndt-row' }, codeInput, confirmButton, discardButton),
     );
   }
@@ -128,12 +133,15 @@ function buildPanel() {
         at: result.manifest.createdAt,
         filename: result.filename,
         summary: result.summary,
+        partial: result.failed.length > 0,
         hashes: Object.fromEntries(result.manifest.items.map(i => [i.key, i.hash])),
       };
       saveState();
       renderPending();
-      progress.textContent = `เสร็จแล้ว: ${result.filename} (${result.summary})`;
-      for (const warning of result.manifest.warnings.slice(0, 5)) toastr.warning(warning, '', { timeOut: 8000 });
+      progress.textContent = result.failed.length
+        ? `เสร็จบางส่วน: ${result.filename} (${result.summary}) — ขาด ${result.failed.length} หมวด ดูข้อความแจ้งเตือน`
+        : `เสร็จแล้ว: ${result.filename} (${result.summary})`;
+      for (const warning of result.manifest.warnings.slice(0, 5)) toastr.warning(warning, '', { timeOut: 10000 });
     } catch (error) {
       console.error(`[${MODULE}]`, error);
       progress.textContent = '';
