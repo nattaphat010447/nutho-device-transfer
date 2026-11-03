@@ -3,6 +3,7 @@ import { getState, remember, saveState } from './lib/state.js';
 import { h } from './lib/dom.js';
 import { openExportWindow } from './lib/export-ui.js';
 import { startImport } from './lib/import-ui.js';
+import { buildSyncSection } from './lib/sync-ui.js';
 
 /* The settings panel stays small: device name, the two entry buttons and the "other side received it" box.
    Everything you pick lives in the full-screen windows (lib/export-ui.js, lib/import-ui.js). */
@@ -100,6 +101,8 @@ function buildPanel() {
       h('div', { class: 'inline-drawer-icon fa-solid fa-circle-chevron-down down' })),
     h('div', { class: 'inline-drawer-content' },
       h('label', { class: 'ndt-field' }, h('span', { text: 'ชื่อเครื่องนี้' }), deviceInput),
+      buildSyncSection(),
+      h('h4', { text: 'ส่งเป็นไฟล์ (สำรอง)' }),
       h('div', { class: 'ndt-muted', text: last }),
       h('div', { class: 'ndt-row' }, exportButton, importButton),
       fileInput,

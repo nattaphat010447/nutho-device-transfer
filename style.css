@@ -135,3 +135,11 @@ dialog.ndt-modal::backdrop { background: rgba(0, 0, 0, 0.6); }
   .ndt-result-icon { width: 56px; height: 56px; }
 }
 .ndt-code-row .menu_button { white-space: nowrap; width: auto; }
+
+/* ---- cloud sync ---- */
+.ndt-cloud { margin: 8px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--SmartThemeBorderColor); }
+.ndt-bigsync { width: 100%; justify-content: center; margin: 8px 0 4px; min-height: 44px; font-size: 1.05em; }
+.ndt-result-wide { max-width: 760px; }
+.ndt-card-left { text-align: left; }
+.ndt-line { padding: 3px 0; word-break: break-word; border-top: 1px solid rgba(128, 128, 128, 0.15); }
+.ndt-line:first-of-type { border-top: none; }
