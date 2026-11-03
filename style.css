@@ -1,165 +1,114 @@
-.ndt-root h4 {
-  margin: 14px 0 6px;
-}
+/* ---- settings panel ---- */
+.ndt-root h4 { margin: 14px 0 6px; }
+.ndt-field { display: flex; flex-direction: column; gap: 4px; }
+.ndt-muted { opacity: 0.7; font-size: 0.9em; margin: 4px 0; }
+.ndt-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0; }
+.ndt-code { width: 9em; }
+.ndt-pending { margin: 8px 0; padding: 8px; border: 1px solid var(--SmartThemeBorderColor); border-radius: 8px; }
+.ndt-pending:empty { display: none; }
+.ndt-pending-title { font-weight: bold; word-break: break-all; }
+.ndt-warn { color: var(--warning, #e8a33d); font-size: 0.9em; margin: 2px 0; }
+.ndt-error { color: var(--fullred, #ff5555); font-size: 0.9em; margin: 2px 0; word-break: break-word; }
+.ndt-link { text-decoration: underline; cursor: pointer; }
+.ndt-title { font-weight: bold; font-size: 1.1em; }
+.ndt-code-big { font-size: 1.6em; letter-spacing: 0.2em; font-weight: bold; margin: 8px 0; }
 
-.ndt-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.ndt-cats {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-bottom: 8px;
-}
-
-.ndt-check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 32px;
-}
-
-.ndt-muted {
-  opacity: 0.7;
-  font-size: 0.9em;
-  margin: 4px 0;
-}
-
-.ndt-info {
-  margin: 6px 0;
-  font-size: 0.9em;
-}
-
-.ndt-progress {
-  margin: 6px 0;
-  font-size: 0.9em;
-  word-break: break-all;
-}
-
-.ndt-pending {
-  margin: 8px 0;
-  padding: 8px;
+/* ---- full-screen window ---- */
+dialog.ndt-modal {
+  padding: 0;
+  margin: auto;
+  width: min(1100px, 100vw);
+  height: min(92dvh, 940px);
+  max-width: 100vw;
+  max-height: 100dvh;
   border: 1px solid var(--SmartThemeBorderColor);
-  border-radius: 8px;
+  border-radius: 12px;
+  background: var(--SmartThemeBlurTintColor);
+  color: var(--SmartThemeBodyColor);
+  box-shadow: 0 0 30px var(--SmartThemeShadowColor, rgba(0, 0, 0, 0.6));
+  overflow: hidden;
 }
+dialog.ndt-modal[open] { display: flex; flex-direction: column; }
+dialog.ndt-modal::backdrop { background: rgba(0, 0, 0, 0.6); }
 
-.ndt-pending:empty {
-  display: none;
+.ndt-modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 10px 14px; border-bottom: 1px solid var(--SmartThemeBorderColor);
 }
+.ndt-modal-title { font-weight: bold; font-size: 1.2em; }
+.ndt-icon-btn { min-width: 34px; min-height: 34px; padding: 0 8px; display: inline-flex; align-items: center; justify-content: center; user-select: none; }
 
-.ndt-pending-title {
-  font-weight: bold;
-  word-break: break-all;
+.ndt-tabs {
+  display: flex; gap: 4px; padding: 6px 10px 0; overflow-x: auto; flex: 0 0 auto;
+  border-bottom: 1px solid var(--SmartThemeBorderColor); scrollbar-width: thin;
 }
+.ndt-tabs:empty { display: none; }
+.ndt-tab {
+  display: flex; align-items: center; gap: 6px; padding: 8px 12px; cursor: pointer; white-space: nowrap;
+  border: 1px solid transparent; border-bottom: none; border-radius: 8px 8px 0 0; opacity: 0.75; user-select: none;
+}
+.ndt-tab.ndt-active { opacity: 1; font-weight: bold; background: rgba(128, 128, 128, 0.18); border-color: var(--SmartThemeBorderColor); }
+.ndt-tab.ndt-off { text-decoration: line-through; opacity: 0.45; }
+.ndt-tab-count { font-size: 0.75em; opacity: 0.7; font-weight: normal; }
 
-.ndt-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin-top: 6px;
+.ndt-modal-body { flex: 1 1 auto; overflow-y: auto; padding: 10px 14px; min-height: 0; text-align: left; }
+.ndt-modal-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex: 0 0 auto;
+  padding: 10px 14px; border-top: 1px solid var(--SmartThemeBorderColor);
 }
+.ndt-foot-text { min-width: 0; flex: 1 1 auto; }
+.ndt-foot-info { margin: 0; }
+.ndt-progress { font-size: 0.9em; word-break: break-all; }
+.ndt-primary { flex: 0 0 auto; font-weight: bold; }
 
-.ndt-code {
-  width: 9em;
-}
+.ndt-modebar { margin-bottom: 8px; }
+.ndt-check { display: flex; align-items: center; gap: 8px; min-height: 34px; }
+.ndt-catswitch { font-weight: bold; }
+.ndt-dim .ndt-picker { opacity: 0.45; }
+.ndt-loading { padding: 20px 0; text-align: center; }
+.ndt-head { margin-bottom: 8px; }
 
-.ndt-review {
-  text-align: left;
-}
+/* ---- picker ---- */
+.ndt-toolbar { display: flex; flex-direction: column; gap: 6px; margin-bottom: 6px; }
+.ndt-toolbar-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ndt-toolbar select.text_pole, .ndt-toolbar .menu_button { width: auto; margin: 0; }
+.ndt-search { width: 100%; margin: 0; }
+.ndt-count { margin: 2px 0 6px; }
 
-.ndt-head {
-  margin-bottom: 8px;
-}
-
-.ndt-title {
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-.ndt-warn {
-  color: var(--warning, #e8a33d);
-  font-size: 0.9em;
-  margin: 2px 0;
-}
-
-.ndt-error {
-  color: var(--fullred, #ff5555);
-  font-size: 0.9em;
-  margin: 2px 0;
-  word-break: break-word;
-}
-
-.ndt-code-big {
-  font-size: 1.6em;
-  letter-spacing: 0.2em;
-  font-weight: bold;
-  margin: 8px 0;
-}
-
-.ndt-group {
-  margin: 6px 0;
-  border: 1px solid var(--SmartThemeBorderColor);
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-
-.ndt-group > summary {
-  cursor: pointer;
-  min-height: 36px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.ndt-group { border: 1px solid var(--SmartThemeBorderColor); border-radius: 8px; padding: 2px 8px; margin: 6px 0; }
+.ndt-group-head { display: flex; align-items: center; gap: 8px; min-height: 40px; cursor: pointer; flex-wrap: wrap; }
+.ndt-group[open] > .ndt-group-head { border-bottom: 1px solid rgba(128, 128, 128, 0.2); }
 
 .ndt-item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 8px;
-  min-height: 36px;
-  padding: 2px 0;
-  border-top: 1px solid rgba(128, 128, 128, 0.15);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; min-height: 40px; padding: 2px 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.15); cursor: pointer;
 }
-
-.ndt-name {
-  flex: 1 1 12em;
-  min-width: 0;
-  word-break: break-word;
+.ndt-picker > .ndt-list > .ndt-item:first-child { border-top: none; }
+.ndt-item input[type=checkbox], .ndt-group-head input[type=checkbox] { flex: 0 0 auto; width: 20px; height: 20px; margin: 0; }
+.ndt-name { flex: 1 1 12em; min-width: 0; word-break: break-word; }
+.ndt-kind, .ndt-tag, .ndt-badge {
+  font-size: 0.72em; padding: 1px 7px; border-radius: 999px; background: rgba(128, 128, 128, 0.25); white-space: nowrap;
 }
-
-.ndt-badge {
-  font-size: 0.75em;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: rgba(128, 128, 128, 0.25);
-  white-space: nowrap;
-}
-
+.ndt-tag { background: rgba(120, 160, 220, 0.25); }
+.ndt-note { font-size: 0.8em; opacity: 0.65; word-break: break-all; }
+.ndt-action { width: auto; min-width: 9em; margin: 0; }
 .ndt-new .ndt-badge { background: rgba(60, 170, 90, 0.35); }
 .ndt-update .ndt-badge { background: rgba(60, 130, 220, 0.35); }
 .ndt-conflict .ndt-badge { background: rgba(230, 150, 40, 0.4); }
 .ndt-older .ndt-badge { background: rgba(160, 100, 200, 0.35); }
 .ndt-unavailable .ndt-badge { background: rgba(220, 70, 70, 0.4); }
+.ndt-same { opacity: 0.55; }
+.ndt-empty { padding: 24px 0; text-align: center; }
 
-.ndt-note {
-  font-size: 0.8em;
-  opacity: 0.65;
-  word-break: break-all;
-}
+.ndt-pager { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 10px 0 4px; }
+.ndt-pager .menu_button.disabled { opacity: 0.35; pointer-events: none; }
+.ndt-pageno { min-width: 4.5em; text-align: center; font-weight: bold; }
 
-.ndt-action {
-  width: auto;
-  min-width: 9em;
-  margin: 0;
-}
-
-.ndt-foot {
-  position: sticky;
-  bottom: 0;
-  padding: 8px 0 0;
-  background: var(--SmartThemeBlurTintColor);
+/* ---- phones: the window takes the whole screen ---- */
+@media (max-width: 800px) {
+  dialog.ndt-modal { width: 100vw; height: 100dvh; border-radius: 0; border: none; }
+  .ndt-modal-foot { flex-wrap: wrap; }
+  .ndt-primary { width: 100%; justify-content: center; }
+  .ndt-toolbar-row select.text_pole { flex: 1 1 40%; }
+  .ndt-item { min-height: 44px; }
 }
