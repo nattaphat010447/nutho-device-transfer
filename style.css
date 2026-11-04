@@ -143,3 +143,11 @@ dialog.ndt-modal::backdrop { background: rgba(0, 0, 0, 0.6); }
 .ndt-card-left { text-align: left; }
 .ndt-line { padding: 3px 0; word-break: break-word; border-top: 1px solid rgba(128, 128, 128, 0.15); }
 .ndt-line:first-of-type { border-top: none; }
+
+/* ---- sync progress bar ---- */
+.ndt-prog { padding: 24px 8px; text-align: center; }
+.ndt-prog-title { font-weight: bold; margin-bottom: 12px; }
+.ndt-prog-track { height: 14px; border-radius: 7px; overflow: hidden; border: 1px solid var(--SmartThemeBorderColor); background: var(--black30a, rgba(0, 0, 0, 0.3)); }
+.ndt-prog-fill { height: 100%; width: 0; background: var(--SmartThemeQuoteColor, #4a9eff); transition: width 0.25s ease; }
+.ndt-prog-pct { margin-top: 6px; font-size: 0.9em; }
+.ndt-prog-detail { margin-top: 10px; min-height: 1.4em; word-break: break-all; }
